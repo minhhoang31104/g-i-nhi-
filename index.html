@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gửi Nhi</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            overflow: hidden; /* Không cho hiện thanh cuộn */
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Hiệu ứng chữ chạy từ dưới lên */
+        .message {
+            position: relative;
+            color: red;
+            font-size: 3rem;
+            font-weight: bold;
+            text-align: center;
+            z-index: 10;
+            animation: moveUp 3s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes moveUp {
+            0% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* CSS cho trái tim */
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 20px;
+            pointer-events: none;
+            animation: float 4s linear forwards;
+            z-index: 5;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.5);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="message">Minh xin lỗi nhi ạ</div>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤'; // Biểu tượng trái tim
+            
+            // Vị trí ngẫu nhiên theo chiều ngang
+            heart.style.left = Math.random() * 100 + 'vw';
+            
+            // Kích thước ngẫu nhiên cho sinh động
+            const size = Math.random() * 20 + 10 + 'px';
+            heart.style.fontSize = size;
+            
+            // Thời gian bay ngẫu nhiên
+            const duration = Math.random() * 3 + 2 + 's';
+            heart.style.animationDuration = duration;
+
+            document.body.appendChild(heart);
+
+            // Xóa tim sau khi bay xong để tránh nặng máy
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        // Tạo tim liên tục để tràn màn hình
+        setInterval(createHeart, 100); 
+    </script>
+</body>
+</html>
